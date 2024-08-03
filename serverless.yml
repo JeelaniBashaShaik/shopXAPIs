@@ -1,0 +1,15 @@
+service: shopX-information
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 512
+  stage: dev
+  region: ap-south-1
+
+functions:
+  business:
+    handler: "dist/business/index.businessHandler"
+    events:
+      - http: GET /
+      - http: GET /name
