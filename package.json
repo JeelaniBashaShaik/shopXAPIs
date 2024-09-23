@@ -1,14 +1,32 @@
 {
+  "name": "shopxapis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start-biz": "ts-node-dev --respawn --transpile-only src/business/index.ts",
+    "start-authZ": "ts-node src/authorizer/index.js",
+    "build-biz": "esbuild src/business/index.ts --bundle --platform=node --outdir=dist/business",
+    "build-authZ": "esbuild src/authorizer/index.ts --bundle --platform=node --outdir=dist/authorizer"
+  },
   "dependencies": {
+    "@aws-sdk/client-api-gateway": "^3.657.0",
+    "@aws-sdk/client-dynamodb": "^3.656.0",
     "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.23.0",
     "express": "^4.19.2",
+    "google-auth-library": "^8.0.0",
+    "serverless": "^4.4.0",
     "serverless-http": "^3.2.0"
   },
-  "scripts": {
-    "start-biz": "node src/business/index.js",
-    "start-authZ": "node src/authorizer/index.js",
-    "build-biz": "esbuild src/business/index.js --bundle --platform=node --outdir=dist/business",
-    "build-authZ": "esbuild src/authorizer/index.js --bundle --platform=node --outdir=dist/authorizer"
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^14.18.63",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.9.5"
   }
 }

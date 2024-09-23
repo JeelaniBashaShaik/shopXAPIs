@@ -8,8 +8,27 @@ provider:
   region: ap-south-1
 
 functions:
+  gis-authorizer:
+    handler: dist/authorizer/index.handler
   business:
-    handler: "dist/business/index.businessHandler"
+    handler: dist/business/index.handler
     events:
-      - http: GET /
-      - http: GET /name
+      - http:
+          path: /api/user/{userId}/cart
+          method: GET
+          authorizer: gis-authorizer
+      - http:
+          path: /api/user/{userId}/cart
+          method: POST
+          authorizer: gis-authorizer
+
+package:
+  exclude:
+    - node_modules/**
+    - .git/**
+    - .vscode/**
+    - src/**
+    - docs/**
+    - package-lock.json
+    - package.json
+    - tsconfig.json
